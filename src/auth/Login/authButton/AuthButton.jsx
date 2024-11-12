@@ -2,9 +2,9 @@ import './authbutton.css'
 
 const AuthButton = ({ onClick, text }) => {
   return (
-    <button onClick={onClick}>
-      {text}
-    </button>
+    <button className="auth-button" onClick={onClick}>
+    {text}
+  </button>
   );
 };
 

@@ -4,7 +4,7 @@ import './toggleButton.css'
 
 const ToggleButton = ({ onClick, text }) => {
   return (
-    <button onClick={onClick}>
+    <button className='toggle-button ' onClick={onClick}>
       {text}
     </button>
   );

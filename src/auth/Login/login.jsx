@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +41,7 @@ const Login = () => {
         navigate('/clients');
       }
     } catch (err) {
-      setError('Error al iniciar sesión, verifique sus credenciales.');
+      setError('Error al iniciar sesión, error en el usuario o contraseña');
     }
   };
 
@@ -64,72 +63,83 @@ const Login = () => {
     }
   };
 
+  // Función para manejar el "Enter"
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Evita el comportamiento por defecto del Enter
+      isRegister ? handleRegister() : handleLogin(); // Llama a la función correspondiente
+    }
+  };
 
-    return (
-      <div className="login-container">
-        <div className="login-form">
-          <h1>{isRegister ? 'Registro' : 'Iniciar Sesión'}</h1>
-          <ErrorMessage error={error} className="error-message" />
-          
-          {isRegister && (
-            <>
-              <InputField
-                name="nombre"
-                value={nombre}
-                onChange={handleInputChange}
-                placeholder="Nombre o Apodo"
-                className="input-field"
-              />
-              <InputField
-                name="telefono"
-                value={telefono}
-                onChange={handleInputChange}
-                placeholder="Número de Teléfono"
-                className="input-field"
-              />
-              <InputField
-                name="direccion"
-                value={direccion}
-                onChange={handleInputChange}
-                placeholder="Dirección"
-                className="input-field"
-              />
-            </>
-          )}
-          
-          <InputField
-            name="email"
-            value={email}
-            onChange={handleInputChange}
-            placeholder="Email"
-            type="email"
-            className="input-field"
-          />
-          
-          <InputField
-            name="password"
-            value={password}
-            onChange={handleInputChange}
-            placeholder="Password"
-            type="password"
-            className="input-field"
-          />
-          
-          <AuthButton
-            onClick={isRegister ? handleRegister : handleLogin}
-            text={isRegister ? 'Registrarse' : 'Iniciar Sesión'}
-            className="auth-button"
-          />
-          
-          <ToggleButton
-            onClick={() => setIsRegister(!isRegister)}
-            text={isRegister ? '¿Ya tienes cuenta? ¡Inicia sesión!' : '¿No tienes cuenta? Regístrate gratis!'}
-            className="toggle-button"
-          />
-        </div>
+  return (
+    <div className="login-container">
+      <div className="login-form">
+        <h1>{isRegister ? 'Registro' : 'Iniciar Sesión'}</h1>
+        <ErrorMessage error={error} className="error-message" />
+        
+        {isRegister && (
+          <>
+            <InputField
+              name="nombre"
+              value={nombre}
+              onChange={handleInputChange}
+              placeholder="Nombre o Apodo"
+              className="input-field"
+              onKeyDown={handleKeyDown} // Agrega el evento onKeyDown
+            />
+            <InputField
+              name="telefono"
+              value={telefono}
+              onChange={handleInputChange}
+              placeholder="Número de Teléfono"
+              className="input-field"
+              onKeyDown={handleKeyDown} // Agrega el evento onKeyDown
+            />
+            <InputField
+              name="direccion"
+              value={direccion}
+              onChange={handleInputChange}
+              placeholder="Dirección"
+              className="input-field"
+              onKeyDown={handleKeyDown} // Agrega el evento onKeyDown
+            />
+          </>
+        )}
+        
+        <InputField
+          name="email"
+          value={email}
+          onChange={handleInputChange}
+          placeholder="Correo"
+          type="email"
+          className="input-field"
+          onKeyDown={handleKeyDown} // Agrega el evento onKeyDown
+        />
+        
+        <InputField
+          name="password"
+          value={password}
+          onChange={handleInputChange}
+          placeholder="Contraseña"
+          type="password"
+          className="input-field"
+          onKeyDown={handleKeyDown} // Agrega el evento onKeyDown
+        />
+        
+        <AuthButton
+          onClick={isRegister ? handleRegister : handleLogin}
+          text={isRegister ? 'Registrarse' : 'Iniciar Sesión'}
+          className="auth-button"
+        />
+        
+        <ToggleButton
+          onClick={() => setIsRegister(!isRegister)}
+          text={isRegister ? '¿Ya tienes cuenta? ¡Inicia sesión!' : '¿No tienes cuenta? Regístrate gratis!'}
+          className="toggle-button"
+        />
       </div>
-    );
-    
+    </div>
+  );
 };
 
 export default Login;
