@@ -1,14 +1,14 @@
-// Login.js
+
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { db } from "../../firebase/firebaseconfig";
 import { doc, setDoc } from "firebase/firestore";
-import InputField from './InputField';  
-import ErrorMessage from './ErrorMessage'; 
-import AuthButton from './AuthButton'; 
-import ToggleButton from './ToggleButton'; 
-import './'
+import InputField from './inputField/InputField';  
+import ErrorMessage from './errormessage/ErrorMessage'; 
+import AuthButton from './authButton/AuthButton'; 
+import ToggleButton from './toggleButton/ToggleButton'; 
+import './css/style.css'
 
 const auth = getAuth();
 
